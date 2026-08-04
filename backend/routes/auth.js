@@ -40,13 +40,15 @@ router.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const newUser = await pool.query(
-            'INSERT INTO users (email, password_hash, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, email',
+            'INSERT INTO users (email, password_hash, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12) RETURNING id, email, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height',
             [email, hashedPassword, firstName, lastName, dateOfBirth, phone, gender, country, city, image, weight, height])
 
         const token = generateToken(newUser.rows[0].id);
         res.cookie('token', token, cookieOptions);
 
-        return res.status(201).json({ message: 'User registered successfully' });
+        const userData = newUser.rows[0];
+
+        return res.status(201).json({ user: {id: userData.id, email: userData.email, firstName: userData.first_name, lastName: userData.last_name, dateOfBirth: userData.date_of_birth, phone: userData.phone_number, gender: userData.gender, country: userData.country, city: userData.city, image: userData.image, height: userData.height, weight: userData.weight} });
     } catch (error) {
         console.error('Error registering user:', error);
         return res.status(500).json({ message: 'Internal server error' });
@@ -78,10 +80,10 @@ router.post('/login', async (req, res) => {
         const token = generateToken(userData.id);
         res.cookie('token', token, cookieOptions);
 
-        return res.status(200).json({ message: 'User logged in successfully' });
+        return res.status(200).json({ user: {id: userData.id, email: userData.email, firstName: userData.first_name, lastName: userData.last_name, dateOfBirth: userData.date_of_birth, phone: userData.phone_number, gender: userData.gender, country: userData.country, city: userData.city, image: userData.image, height: userData.height, weight: userData.weight} });
     } catch (error) {
         console.error('Error logging in user:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        return es.status(500).json({ message: 'Internal server error' });
     }
 });
 
@@ -89,7 +91,7 @@ router.post('/me', protect, async (req, res) => {
     res.json(req.user);
 })
 
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     res.clearCookie('token', "", { ...cookieOptions, maxAge: 1 });
     res.json({ message: 'User logged out successfully' });
 });
