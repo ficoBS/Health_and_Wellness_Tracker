@@ -1,8 +1,11 @@
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useAuth } from '../../context/useAuth'
 
-const Login = ({ setUser }) => {
+const Login = () => {
+    const {setUser} = useAuth();
+
     const [form, setForm] = useState({
         email: '',
         password: '',
@@ -13,11 +16,13 @@ const Login = ({ setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post("http://localhost:5000/api/auth/login", form);
-            setUser(result.data);
+            const result = await axios.post("http://localhost:5000/api/auth/login", form, 
+                {withCredentials: true}
+            );
+            setUser(result.data.user);
             navigate("/dashboard");
         } catch (error) {
-            setError(error.response?.data?.message || "Something went wrong. Try again.");
+            setError("Something went wrong. Try again.");
         }
     }
 

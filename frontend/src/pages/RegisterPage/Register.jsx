@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { useAuth } from '../../context/useAuth'
 
-const Register = ({ setUser }) => {
+const Register = () => {
+
+    const {setUser} = useAuth();
 
     const [form, setForm] = useState({
         email: '',
@@ -25,8 +28,10 @@ const Register = ({ setUser }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const result = await axios.post("http://localhost:5000/api/auth/register", form);
-            setUser(result.data);
+            const result = await axios.post("http://localhost:5000/api/auth/register", form,
+                {withCredentials: true}
+            );
+            setUser(result.data.user);
             navigate("/dashboard");
         } catch (error) {
             setError(error.response?.data?.message || "Something went wrong. Try again.")

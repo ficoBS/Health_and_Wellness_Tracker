@@ -1,13 +1,17 @@
-// import React, { useState } from 'react'
+import React from 'react'
+import { useAuth } from '../../context/useAuth'
 
 const Dashboard = () => {
-    // const [user, setUser] = useState(null)
-    // const [error, setError] = useState('');
-    // const [loading, setLoading] = useState(true);
+    const {user, loading, logout} = useAuth();
 
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    console.log(user);
     return (
         <div>
-            Hello to dashboard
+            Hello to dashboard {user.first_name} <button onClick={logout}>Logout</button>
         </div>
     )
 }
