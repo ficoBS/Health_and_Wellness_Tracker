@@ -1,0 +1,33 @@
+#botNav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content:space-evenly;
+    background-color: lightblue;
+    height: 70px;
+    align-items: center;
+    text-align: center;
+}
+
+.botNav img {
+    max-width: 30px;
+}
+
+.botNavItem {
+    width: 20%;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.link p {
+    margin: 0;
+    color: gray;
+}
+
+.linkActive div {
+    background-color: white;
+    border-radius: 50%;
+}

@@ -1,0 +1,24 @@
+#topNav {
+    display: flex;
+    justify-content: space-between;
+    background-color: lightblue;
+    align-items: center;
+    height: 70px;
+    width: 100%;
+}
+
+#logo img {
+    width: 160px;
+}
+
+#profile {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#profile img {
+    background-color: white;
+    width: 40px;
+    border-radius: 50%;
+}
