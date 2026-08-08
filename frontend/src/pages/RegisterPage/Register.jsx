@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { useAuth } from '../../context/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 const Register = () => {
 
@@ -35,6 +35,27 @@ const Register = () => {
             navigate("/dashboard");
         } catch (error) {
             setError(error.response?.data?.message || "Something went wrong. Try again.")
+        }
+    }
+
+    const uploadImage = async (e) => {
+        const file = e.target.files[0];
+
+        const formData = new FormData();
+        formData.append("image", file)
+        try {
+            const result = await axios.post("http://localhost:5000/api/upload/profile_image", formData, 
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            )
+
+            setForm({...form, image: result.data.url});
+        } catch (error) {
+            console.log("Failed uploading image: " + error);
         }
     }
 
@@ -76,8 +97,8 @@ const Register = () => {
                     <label htmlFor="city">City</label>
                     <input type="text" id="city" value={form.city} onChange={(e) => setForm({...form, city: e.target.value})} />
 
-                    {/* <label htmlFor="image">Profile Image</label>
-                    <input type="file" id="image" accept="image/*" value={form.image} onChange={(e) => setForm({...form, image: e.target.value})} /> */}
+                    <label htmlFor="image">Profile Image</label>
+                    <input type="file" id="image" accept="image/*" onChange={uploadImage} />
 
                     <label htmlFor="weight">Weight (kg)</label>
                     <input type="number" id="weight" value={form.weight} onChange={(e) => setForm({...form, weight: e.target.value})} />

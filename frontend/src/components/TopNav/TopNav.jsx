@@ -1,7 +1,7 @@
 import bigLogo from '../../assets/big_logo.png'
 import userLogo from '../../assets/user_logo.svg'
 import './TopNav.css'
-import { useAuth } from '../../context/useAuth'
+import { useAuth } from '../../hooks/useAuth'
 
 const TopNav = () => {
     const {user, setUser, logout} = useAuth();
