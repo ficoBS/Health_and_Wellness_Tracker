@@ -13,6 +13,7 @@ import DashboardPage from './pages/DashboardPage/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import PublicRoute from './components/PublicRoute'
 import MainLayout from './components/MainLayout/MainLayout'
+import Analytics from './pages/AnalyticsPage/Analytics'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />} >
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path='/analytics' element={<Analytics />} />
           </Route>
         </Route>
 

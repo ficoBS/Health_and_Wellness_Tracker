@@ -1,0 +1,86 @@
+main {
+    padding: 20px 0 90px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+#cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 500px;
+    gap: 20px;
+}
+
+.card {
+    width: 100%;
+    background-color: lightblue;
+    border-radius: 20px;
+    padding: 15px 15px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#dataInputSteps {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#removeSteps {
+    background-color: red;
+    width: 35px;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+}
+
+#addSteps {
+    background-color: green;
+    width: 35px;
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+    border-radius: 50%;
+}
+
+#dataInputWater {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+#dataInputWater button {
+    width: 110px;
+    height: 40px;
+    border: none;
+    border-radius: 50px;
+}
+
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.progressFill {
+    height: 100%;
+    background: #4caf50;
+    border-radius: 10px;
+}
