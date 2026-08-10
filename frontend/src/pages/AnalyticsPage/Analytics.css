@@ -1,0 +1,45 @@
+main {
+    padding: 20px 0 90px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+}
+
+#cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 500px;
+    gap: 20px;
+}
+
+.card {
+    width: 100%;
+    background-color: lightblue;
+    border-radius: 20px;
+    padding: 15px 15px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cardHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.chartContainer {
+    width: 100%;
+    height: 380px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: var(--card-bg, #fff);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 15px 15px 15px 15px;
+    border: 1px solid black;
+}
