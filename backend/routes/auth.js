@@ -94,4 +94,44 @@ router.post('/logout', (req, res) => {
     res.json({ message: 'User logged out successfully' });
 });
 
+router.post('/changeInfo', protect, async (req, res) => {
+    const {userId, firstName, lastName, phone, country, city, weight, height, password, password2} = req.body;
+
+    if (password === password2 && password === '') {
+        try {
+            const result = await pool.query("UPDATE users SET first_name = $1, last_name = $2, phone_number = $3, country = $4, city = $5, weight = $6, height = $7, updated_at = CURRENT_TIMESTAMP WHERE id = $8 RETURNING id, email, role, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height, goal_steps, goal_cal_intake, goal_cal_burned, goal_water_intake, goal_sleep_time, goal_weight, created_at", [firstName, lastName, phone, country, city, weight, height, userId]);
+            return res.status(200).json({ user: result.rows[0] });
+        } catch {
+            return res.status(500).json({message: "Can't change user info1"});
+        }
+    }
+    else {
+        if (password !== password2) {
+            return res.status(400).json({ message: 'Passwords do not match' });
+        }
+
+        const passwordHash = await bcrypt.hash(password, 10);
+
+        try {
+            const result = await pool.query("UPDATE users SET first_name = $1, last_name = $2, phone_number = $3, country = $4, city = $5, weight = $6, height = $7, updated_at = CURRENT_TIMESTAMP, password_hash = $9 WHERE id = $8 RETURNING id, email, role, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height, goal_steps, goal_cal_intake, goal_cal_burned, goal_water_intake, goal_sleep_time, goal_weight, created_at;", [firstName, lastName, phone, country, city, weight, height, userId, passwordHash]);
+
+            return res.status(200).json({ user: result.rows[0] });
+        } catch {
+            return res.status(500).json({message: "Can't change user info2"});
+        }
+    }
+})
+
+router.post('/changeImage', protect, async (req, res) => {
+    const {userId, image} = req.body;
+
+    try {
+        const result = await pool.query("UPDATE users SET image = $1, updated_at = CURRENT_TIMESTAMP WHERE id = $2 RETURNING id, email, role, first_name, last_name, date_of_birth, phone_number, gender, country, city, image, weight, height, goal_steps, goal_cal_intake, goal_cal_burned, goal_water_intake, goal_sleep_time, goal_weight, created_at;", [image, userId]);
+
+        return res.status(200).json({ user: result.rows[0] });
+    } catch {
+            return res.status(500).json({message: "Can't change user info2"});
+    }
+})
+
 export default router;
