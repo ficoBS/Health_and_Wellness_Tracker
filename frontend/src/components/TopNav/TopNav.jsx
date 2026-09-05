@@ -18,7 +18,6 @@ const TopNav = () => {
 
                 
                 {user.first_name} {user.last_name}
-                <button onClick={logout}>Logout</button>
             </div>
         </div>
     )

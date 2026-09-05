@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/auth.js";
 import uploadRoutes from "./routes/upload.js"
 import logRoutes from './routes/logs.js'
+import userRoutes from './routes/users.js'
+import coachRoutes from './routes/coach.js'
 
 
 dotenv.config();
@@ -22,6 +24,8 @@ const port = process.env.PORT || 5000;
 app.use('/api/auth', authRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/logs', logRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/coach', coachRoutes);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

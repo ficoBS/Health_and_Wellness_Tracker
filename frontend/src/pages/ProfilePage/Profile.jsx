@@ -4,14 +4,39 @@ import { useParams, useNavigate } from 'react-router-dom'
 import userLogo from '../../assets/user_profile.svg'
 import './Profile.css'
 import axios from 'axios'
+import { useEffect } from 'react'
 
 const Profile = () => {
     const {user, setUser, logout} = useAuth();
     const { userId } = useParams();
     const [showModal, setShowModal] = useState(false);
     const [showModalImage, setShowModalImage] = useState(false);
+    const [selectedUser, setSelectedUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [loadingImage, setLoadingImage] = useState(false);
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            if (!userId || userId === String(user.id)) {
+                setSelectedUser(user);
+                setLoading(false);
+                return;
+            }
+
+            try {
+                const getUser = await axios.get(`http://localhost:5000/api/users/${userId}`);
+                setSelectedUser(getUser.data.user);
+            } catch (error) {
+                console.log("Could not fetch other user by id");
+                setSelectedUser(null);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchUser();
+    }, [user])
 
     const [userImage, setUserImage] = useState({
         userId: user.id,
@@ -90,6 +115,7 @@ const Profile = () => {
     }
 
     const uploadImage = async (e) => {
+        setLoadingImage(true);
         const file = e.target.files[0];
 
         const formData = new FormData();
@@ -107,6 +133,8 @@ const Profile = () => {
             setUserImage({...userImage, image: result.data.url});
         } catch (error) {
             console.log("Failed uploading image: " + error);
+        } finally {
+            setLoadingImage(false);
         }
     }
 
@@ -125,17 +153,22 @@ const Profile = () => {
         }
     }
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    console.log(selectedUser);
     return (
         <main>
             <div id='profileHeader'>
                 <div>
-                    {!user.image ?
+                    {!selectedUser.image ?
                     <img src={userLogo} alt='userLogo' /> :
-                    <img src={user.image} alt='userLogo' />}
+                    <img src={selectedUser.image} alt='userLogo' />}
                 </div>
                 <div>
-                    <span>{user.first_name} {user.last_name}</span>
-                    <p>Member since {user.created_at.substr(0,10)}</p>
+                    <span>{selectedUser.first_name} {selectedUser.last_name}</span>
+                    <p>Member since {selectedUser.created_at.substr(0,10)}</p>
                     {isPersonal ? <button onClick={() => setShowModalImage(true)}>Edit profile</button> : ""}
                 </div>
             </div>
@@ -150,82 +183,84 @@ const Profile = () => {
 
                 <div>
                     <p>Full Name</p>
-                    <p>{user.first_name} {user.last_name}</p>
+                    <p>{selectedUser.first_name} {selectedUser.last_name}</p>
                 </div>
 
                 <div>
                     <p>Email</p>
-                    <p>{user.email}</p>
+                    <p>{selectedUser.email}</p>
                 </div>
 
                 <div>
                     <p>Age</p>
-                    <p>{calculateAge(user.date_of_birth.substr(0,10))}</p>
+                    <p>{calculateAge(selectedUser.date_of_birth.substr(0,10))}</p>
                 </div>
 
                 <div>
                     <p>Phone Number</p>
-                    <p>{user.phone_number}</p>
+                    <p>{selectedUser.phone_number}</p>
                 </div>
 
                 <div>
                     <p>gender</p>
-                    <p>{user.gender === "male" ? "Male" : "Female"}</p>
+                    <p>{selectedUser.gender === "male" ? "Male" : "Female"}</p>
                 </div>
 
                 <div>
                     <p>Country</p>
-                    <p>{user.country}</p>
+                    <p>{selectedUser.country}</p>
                 </div>
 
                 <div>
                     <p>City</p>
-                    <p>{user.city}</p>
+                    <p>{selectedUser.city}</p>
                 </div>
 
                 <div>
                     <p>Weight</p>
-                    <p>{user.weight}</p>
+                    <p>{selectedUser.weight}</p>
                 </div>
 
                 <div>
                     <p>Height</p>
-                    <p>{user.height}</p>
+                    <p>{selectedUser.height}</p>
                 </div>
             </div>
 
-            {user.role === "coach" ?
+            {selectedUser.role === "coach" ?
                 <div className='card'>
                     <div>
                         <h4>
-                            Personal Info
+                            Coach Info
                         </h4>
-                        {isPersonal ? <button onClick={() => setShowModal(true)}>Edit</button> : ""}
                     </div>
                     
                     {/* COACH INFO */}
                     <div>
                         <p>Full Name</p>
-                        <p>{user.first_name} {user.last_name}</p>
+                        <p>{selectedUser.first_name} {selectedUser.last_name}</p>
                     </div>
 
                 
                 </div>
             : ""}
 
-            {isPersonal && user.role === "user" && calculateAge(user.date_of_birth.substr(0,10)) >= 18 ?
+            {isPersonal && selectedUser.role === "user" && calculateAge(user.date_of_birth.substr(0,10)) >= 18 ?
                 <div className='coachCard'>
                     <p>Become a coach</p>
-                    <button>Apply to be a coach</button>
+                    <button onClick={() => navigate("/coachApply")}>Apply to be a coach</button>
                 </div> :
                 ""
             }
 
             <div className='settingCards'>
+                {isPersonal && selectedUser.role === "admin" ? 
                 <div>
-                    <p>[ADMIN] See job applications</p>
-                    <button onClick={() => navigate("/")}>See job applications</button>
-                </div>
+                    <p>[ADMIN] See admin dashboard</p>
+                    <button onClick={() => navigate("/adminDashboard")}>Admin Dashboard</button>
+                </div> : ""}
+                {isPersonal ?
+                <>
                 <div>
                     <p>Want to logout?</p>
                     <button onClick={logout}>Logout</button>
@@ -235,6 +270,7 @@ const Profile = () => {
                     <p>Want to delete account permanently?</p>
                     <button>Delete account</button>
                 </div>
+                </> : ""}
             </div>
 
 
@@ -332,6 +368,8 @@ const Profile = () => {
                         <form onSubmit={handleSubmitImage}>
                             <input type="file" id="image" accept="image/*" onChange={uploadImage} />
 
+                            {loadingImage ?
+                            <p>WAIT FOR IMAGE</p> : ""}
                             <button type='submit'>Apply</button>
                             <button onClick={() => {setShowModalImage(false); resetImage();}}>Cancel</button>  
                         </form>
