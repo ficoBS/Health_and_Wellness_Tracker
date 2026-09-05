@@ -1,0 +1,90 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main > div {
+    width: 90%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#profileHeader {
+    background-color: lightblue;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#profileHeader img {
+    width: 80px;
+    border-radius: 10px;
+}
+
+#profileHeader p {
+    color: gray;
+    margin: 2px;
+}
+
+.card {
+    width: 85%;
+    padding: 15px;
+}
+
+.card h4, .card p {
+    margin: 0;
+}
+.card > div {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid gray;
+}
+.card > div:first-child, .card > div:last-child {
+    border: 0;
+}
+
+
+
+
+.modalOverlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.modalPanel {
+    position: relative;
+
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+
+    background: white;
+    border-radius: 16px;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.closeButton {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+
+    border: none;
+    background: none;
+
+    font-size: 28px;
+    cursor: pointer;
+}

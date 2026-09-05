@@ -13,7 +13,12 @@ import DashboardPage from './pages/DashboardPage/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute'
 import PublicRoute from './components/PublicRoute'
 import MainLayout from './components/MainLayout/MainLayout'
-import Analytics from './pages/AnalyticsPage/Analytics'
+import AnalyticsPage from './pages/AnalyticsPage/Analytics'
+import ProfilePage from './pages/ProfilePage/Profile'
+import SecondaryLayout from './components/MainLayout/SecondaryLayout'
+import CoachApplyPage from './pages/CoachApplyPage/CoachApply'
+import AdminDashboard from './pages/AdminDashboardPage/AdminDashboard'
+import ApplicationPage from './pages/ApplicationPage/Application'
 
 function App() {
 
@@ -30,7 +35,15 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />} >
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path='/analytics' element={<Analytics />} />
+            <Route path='/analytics' element={<AnalyticsPage />} />
+            <Route path='/coachApply' element={<CoachApplyPage />} />
+            <Route path='/adminDashboard' element={<AdminDashboard />} />
+            <Route path='/profile/:userId' element={<ProfilePage />} />
+            <Route path='/application/:applicationId' element={<ApplicationPage />} />
+          </Route>
+
+          <Route element={<SecondaryLayout />}>
+            <Route path='/profile/' element={<ProfilePage />} />
           </Route>
         </Route>
 
