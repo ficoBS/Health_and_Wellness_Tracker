@@ -19,6 +19,8 @@ import SecondaryLayout from './components/MainLayout/SecondaryLayout'
 import CoachApplyPage from './pages/CoachApplyPage/CoachApply'
 import AdminDashboard from './pages/AdminDashboardPage/AdminDashboard'
 import ApplicationPage from './pages/ApplicationPage/Application'
+import Chats from './pages/ChatsPage/Chats'
+import Messages from './pages/MessagesPage/Messages'
 
 function App() {
 
@@ -40,6 +42,8 @@ function App() {
             <Route path='/adminDashboard' element={<AdminDashboard />} />
             <Route path='/profile/:userId' element={<ProfilePage />} />
             <Route path='/application/:applicationId' element={<ApplicationPage />} />
+            <Route path='/chats' element={<Chats />} />
+            <Route path='/chat/:chatId' element={<Messages />} />
           </Route>
 
           <Route element={<SecondaryLayout />}>

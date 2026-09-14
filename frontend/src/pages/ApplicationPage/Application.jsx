@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import './Application.css'
 
 const Application = () => {
     const [application, setApplication] = useState(null);
@@ -40,14 +41,14 @@ const Application = () => {
     }, [images]);
 
     if (loading) {
-        return <div>loading...</div>
+        return <div className="loading-state">loading...</div>
     }
 
     console.log(application);
     console.log(applicationId);
     return (
-        <main>
-            <div>
+        <main className="page application-page">
+            <div className="card application-card">
                 <div>
                     <h5>Biography</h5>
                     <div>{application.biography}</div>
@@ -67,7 +68,7 @@ const Application = () => {
 
                 <div id='applicationImages'></div>
 
-                <div>
+                <div className="application-meta">
                     <span>Status: </span><span>{application.status}</span><span>Submitted: </span><span>{application.submitted_at.substr(0, 10)}</span>
                 </div>
             </div>

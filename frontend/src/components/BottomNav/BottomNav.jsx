@@ -38,10 +38,10 @@ const BottomNav = () => {
             </div>
 
             <div className='botNavItem'>
-                <NavLink to='/coaches' className={({isActive}) => isActive ? "link linkActive" : "link"}>
+                <NavLink to='/chats' className={({isActive}) => isActive ? "link linkActive" : "link"}>
                     <div>
-                        <img src={messageLogo} alt='coaches' />
-                        <p>Coaches</p>
+                        <img src={messageLogo} alt='chats' />
+                        <p>Chats</p>
                     </div>
                 </NavLink>
             </div>

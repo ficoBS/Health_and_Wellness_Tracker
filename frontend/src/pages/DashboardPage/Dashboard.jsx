@@ -27,7 +27,7 @@ const Dashboard = () => {
     }, [])
 
     if (loading2) {
-        return <div>Loading your Dashboard...</div>
+        return <div className="loading-state">Loading your Dashboard...</div>
     }
 
     const changeSteps = async (mode) => {
@@ -113,8 +113,8 @@ const Dashboard = () => {
     }
 
     return (
-        <main>
-            <div id='cards'>
+        <main className="page dashboard-page">
+            <div id='cards' className="metric-grid">
                 <div className='card'>
                     <div className='cardHeader'>
                         <div>
@@ -132,9 +132,9 @@ const Dashboard = () => {
                         <div className='progressFill' style={{width: `${Math.min(Math.floor((userLog.steps / user.goal_steps) * 100), 100)}%`}} />
                     </div>
                     <div id='dataInputSteps'>
-                        <div id='removeSteps' onClick={() => changeSteps("remove")}>-</div>
+                        <div id='removeSteps' className="btn-icon danger" onClick={() => changeSteps("remove")}>-</div>
                         <input id='stepsNumber' type='number' placeholder='Enter steps' />
-                        <div id='addSteps' onClick={() => changeSteps("add")}>+</div>
+                        <div id='addSteps' className="btn-icon success" onClick={() => changeSteps("add")}>+</div>
                     </div>
                 </div>
 
@@ -155,8 +155,8 @@ const Dashboard = () => {
                         <div className='progressFill' style={{width: `${Math.min(Math.floor((userLog.water_intake / user.goal_water_intake) * 100), 100)}%`}} />
                     </div>
                     <div id='dataInputWater'>
-                        <button id='addWaterGlass' onClick={() => changeWater(250)}>+250ml</button>
-                        <button id='addWaterBottle' onClick={() => changeWater(500)}>+500ml</button>
+                        <button id='addWaterGlass' className="btn btn-secondary" onClick={() => changeWater(250)}>+250ml</button>
+                        <button id='addWaterBottle' className="btn btn-secondary" onClick={() => changeWater(500)}>+500ml</button>
                     </div>
                 </div>
 
@@ -178,7 +178,7 @@ const Dashboard = () => {
                     </div>
                     <div id='dataInputCalories'>
                         <input type='number' id='calIntakeNumber' />
-                        <button id='addCalories' onClick={() => changeCalories("intake")}>Add</button>
+                        <button id='addCalories' className="btn btn-primary btn-sm" onClick={() => changeCalories("intake")}>Add</button>
                     </div>
                 </div>
 
@@ -200,7 +200,7 @@ const Dashboard = () => {
                     </div>
                     <div id='dataInputCalories'>
                         <input type='number' id='calBurnedNumber' />
-                        <button id='addCalories' onClick={() => changeCalories("burned")}>Add</button>
+                        <button id='addCalories' className="btn btn-primary btn-sm" onClick={() => changeCalories("burned")}>Add</button>
                     </div>
                 </div>
 
@@ -223,7 +223,7 @@ const Dashboard = () => {
                     <div id='dataInputSleep'>
                         <input type='number' id='hourInput' placeholder='Hour' />
                         <input type='number' id='minuteInput' placeholder='Monute' />
-                        <button onClick={() => changeSleep()}>Add</button>
+                        <button className="btn btn-primary btn-sm" onClick={() => changeSleep()}>Add</button>
                     </div>
                 </div>
 
@@ -233,20 +233,20 @@ const Dashboard = () => {
                             <span>Enter todays weight</span>
                         </div>
                     </div>
-                    <div>
+                    <div className="cardNumbers">
                         {userLog.weight}
                     </div>
                     <div id='dataInputWeight'>
                         <input type='number' id='weightInput' />
-                        <button onClick={() => changeWeight()}>{userLog.weight == 0 ? "Add" : "Change"}</button>
+                        <button className="btn btn-primary btn-sm" onClick={() => changeWeight()}>{userLog.weight == 0 ? "Add" : "Change"}</button>
                     </div>
                 </div>
 
             </div>
 
-            <div id='chatBox'>
+            <div id='chatBox' className="card">
                 <span>Want to talk to your ai coach</span>
-                <button>Chat now</button>
+                <button className="btn btn-primary">Chat now</button>
             </div>
 
             

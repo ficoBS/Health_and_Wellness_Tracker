@@ -1,22 +1,14 @@
-.coach-apply-page {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+.application-page {
     max-width: 720px;
 }
 
-.coach-apply-page .auth-form .btn,
-.coach-apply-page .auth-form input[type="submit"] {
-    width: 100%;
-}
-
-.application-card {
+.application-page .application-card {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.application-card h5 {
+.application-page h5 {
     margin: 0 0 6px;
     font-size: 0.8rem;
     text-transform: uppercase;
@@ -24,13 +16,13 @@
     color: var(--text-secondary);
 }
 
-.application-card > div > div {
+.application-page .application-card > div > div {
     color: var(--text);
     white-space: pre-wrap;
     word-break: break-word;
 }
 
-.application-meta {
+.application-page .application-meta {
     display: flex;
     flex-wrap: wrap;
     gap: 8px 16px;
@@ -38,13 +30,13 @@
     font-size: 0.9rem;
 }
 
-#applicationImages {
+.application-page #applicationImages {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 10px;
 }
 
-#applicationImages img {
+.application-page #applicationImages img {
     width: 100%;
     height: 120px;
     object-fit: cover;

@@ -34,5 +34,20 @@ router.get("/coaches", async (req, res) => {
     }
 })
 
+router.get("/chats/:coachId", protect, async (req, res) => {
+    try {
+        const {coachId} = req.params;
+        const result = await pool.query("SELECT DISTINCT ON (c.user_id) u.id, u.first_name, u.last_name, u.image AS last_message_at FROM chats c JOIN users u ON u.id = c.user_id WHERE c.coach_id = $1 ORDER BY c.user_id, c.created_at DESC;", [coachId]);
+
+        if (result.rows.length <= 0) {
+            return res.status(200).json({users: []});
+        }
+
+        return res.status(200).json({users: result.rows});
+    } catch (error) {
+        return res.status(500).json({message: "Could not fetch users!"});
+    }
+})
+
 
 export default router

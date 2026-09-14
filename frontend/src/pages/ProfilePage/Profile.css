@@ -1,90 +1,198 @@
-main {
+.profile-page {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 16px;
 }
 
-main > div {
-    width: 90%;
-    padding: 10px;
-    border-radius: 10px;
+.profile-page > div {
+    width: 100%;
 }
 
 #profileHeader {
-    background-color: lightblue;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 16px;
 }
 
 #profileHeader img {
     width: 80px;
-    border-radius: 10px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+}
+
+#profileHeader span {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
 }
 
 #profileHeader p {
-    color: gray;
-    margin: 2px;
+    color: var(--text-secondary);
+    margin: 4px 0 10px;
+    font-size: 0.9rem;
 }
 
-.card {
-    width: 85%;
-    padding: 15px;
+.profile-page .info-card h4 {
+    margin: 0;
+    font-size: 1.05rem;
 }
 
-.card h4, .card p {
+.profile-page .info-card p {
     margin: 0;
 }
-.card > div {
+
+.profile-page .info-card > div {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid gray;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
 }
-.card > div:first-child, .card > div:last-child {
-    border: 0;
+
+.profile-page .info-card > div:first-child,
+.profile-page .info-card > div:last-child {
+    border-bottom: 0;
 }
 
+.profile-page .info-card > div:first-child {
+    padding-top: 0;
+    padding-bottom: 12px;
+    margin-bottom: 4px;
+}
 
+.profile-page .info-card > div p:first-child {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
 
+.coachCard {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.coachCard p {
+    margin: 0;
+    font-weight: 650;
+}
+
+.settingCards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.settingCards > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px;
+}
+
+.settingCards p {
+    margin: 0;
+    font-weight: 650;
+}
 
 .modalOverlay {
     position: fixed;
     inset: 0;
-
-    background: rgba(0, 0, 0, 0.5);
-
+    background: rgba(28, 43, 39, 0.45);
     display: flex;
     justify-content: center;
     align-items: center;
-
-    z-index: 1000;
+    z-index: 1100;
+    padding: 16px;
 }
 
 .modalPanel {
     position: relative;
-
-    width: 90%;
+    width: 100%;
     max-width: 500px;
     max-height: 90vh;
-
-    background: white;
+    background: var(--surface);
     border-radius: 16px;
-
-    padding: 25px;
-
+    padding: 28px 24px 20px;
     overflow-y: auto;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
 
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+.modalPanel h2 {
+    margin: 0 0 16px;
+    font-size: 1.2rem;
+    padding-right: 28px;
+}
+
+.modalPanel .auth-form .btn {
+    width: auto;
+}
+
+.modalPanel .auth-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modalActions,
+.modalPanel form {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.modalPanel form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+}
+
+.modalPanel form > .btn {
+    margin-top: 6px;
 }
 
 .closeButton {
     position: absolute;
     top: 10px;
-    right: 15px;
-
+    right: 12px;
     border: none;
     background: none;
-
     font-size: 28px;
     cursor: pointer;
+    color: var(--text-secondary);
+    min-width: 44px;
+    min-height: 44px;
+}
+
+.closeButton:hover {
+    color: var(--text);
+}
+
+@media (max-width: 767px) {
+    #profileHeader {
+        align-items: flex-start;
+    }
+
+    .settingCards > div,
+    .coachCard {
+        align-items: stretch;
+    }
+
+    .settingCards .btn,
+    .coachCard .btn {
+        width: 100%;
+    }
 }

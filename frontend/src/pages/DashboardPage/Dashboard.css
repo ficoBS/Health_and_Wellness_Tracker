@@ -1,86 +1,73 @@
-main {
-    padding: 20px 0 90px 0;
+.dashboard-page {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
+    align-items: stretch;
+    gap: 16px;
 }
 
-#cards {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 90%;
-    max-width: 500px;
-    gap: 20px;
-}
-
-.card {
+.dashboard-page #cards {
     width: 100%;
-    background-color: lightblue;
-    border-radius: 20px;
-    padding: 15px 15px 15px 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
 }
 
-.cardHeader {
+.dashboard-page .card {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.dashboard-page .cardHeader {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#dataInputSteps {
+#dataInputSteps,
+#dataInputWater,
+#dataInputCalories,
+#dataInputSleep,
+#dataInputWeight {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-#removeSteps {
-    background-color: red;
-    width: 35px;
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-    border-radius: 50%;
-}
-
-#addSteps {
-    background-color: green;
-    width: 35px;
-    text-align: center;
-    color: white;
-    font-size: 2rem;
-    border-radius: 50%;
-}
-
-#dataInputWater {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+#dataInputSteps input,
+#dataInputCalories input,
+#dataInputSleep input,
+#dataInputWeight input {
+    max-width: 160px;
+    min-width: 0;
+    flex: 1;
 }
 
 #dataInputWater button {
-    width: 110px;
-    height: 40px;
-    border: none;
-    border-radius: 50px;
+    flex: 1;
+    min-width: 110px;
 }
 
-
-.progressBar {
-    width: 100%;
-    height: 8px;
-    background: #ddd;
-    border-radius: 10px;
-    overflow: hidden;
-    margin-bottom: 20px;
+#chatBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.progressFill {
-    height: 100%;
-    background: #4caf50;
-    border-radius: 10px;
+#chatBox span {
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    #dataInputSteps input,
+    #dataInputCalories input,
+    #dataInputSleep input,
+    #dataInputWeight input {
+        max-width: none;
+        width: 100%;
+        flex: 1 1 100%;
+    }
 }

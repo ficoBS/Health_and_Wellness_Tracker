@@ -5,7 +5,7 @@ const PublicRoute = () => {
     const { user, setUser, loading } = useAuth();
     
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading-state">Loading...</div>;
     }
 
     if (user) {
