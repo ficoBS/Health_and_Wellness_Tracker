@@ -69,6 +69,22 @@ router.get("/getAll", protect, async (req, res) => {
     }
 })
 
+router.get("/get/:coachId", protect, async (req, res) => {
+    try {
+        const {coachId} = req.params;
+
+        const result = await pool.query("SELECT * FROM coaches WHERE user_id = $1", [coachId]);
+
+        if (result.rows.length === 0) {
+            return res.status(500).json({message: "Coach does not exist"});
+        }
+
+        return res.status(200).json({coach: result.rows[0]});
+    } catch (error) {
+        return res.status(500).json({message: "Could not get coach"});
+    }
+})
+
 router.get("/applications", async (req, res) => {
     try {
         const result = await pool.query("SELECT * FROM coach_applications WHERE status = $1", ["pending"]);

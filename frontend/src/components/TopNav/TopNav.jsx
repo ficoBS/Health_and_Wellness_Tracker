@@ -17,7 +17,7 @@ const TopNav = () => {
                 <img src={user.image} alt='userLogo' />}
 
                 
-                {user.first_name} {user.last_name}
+                <span>{user.first_name} {user.last_name}</span>
             </div>
         </div>
     )

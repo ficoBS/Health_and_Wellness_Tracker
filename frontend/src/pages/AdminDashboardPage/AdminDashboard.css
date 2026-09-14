@@ -1,3 +1,64 @@
-#coachList img {
-    width: 50px;
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+#coachList,
+#applicationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coachListItem {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+}
+
+.coachListItem span {
+    font-weight: 650;
+}
+
+.coachListItem a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.coachListItem a:hover {
+    text-decoration: underline;
+}
+
+#coachList img,
+.coachImage {
+    width: 48px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: var(--primary-soft);
+    border: 1px solid var(--border);
+}
+
+@media (min-width: 768px) {
+    #coachList,
+    #applicationsList {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+}
+
+@media (min-width: 1024px) {
+    #applicationsList {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 767px) {
+    .coachListItem .btn {
+        width: 100%;
+    }
 }

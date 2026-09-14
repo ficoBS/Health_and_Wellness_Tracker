@@ -3,10 +3,12 @@ import BottomNav from '../BottomNav/BottomNav'
 
 const SecondaryLayout = () => {
     return (
-        <>
-            <Outlet />
+        <div className="app-shell app-shell-secondary">
+            <div className="app-content">
+                <Outlet />
+            </div>
             <BottomNav />
-        </>
+        </div>
     )
 }
 

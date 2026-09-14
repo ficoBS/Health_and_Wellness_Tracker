@@ -2,6 +2,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuth } from '../../hooks/useAuth'
+import './Login.css'
 
 const Login = () => {
     const {setUser} = useAuth();
@@ -27,21 +28,21 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <div>
+        <div className="auth-page">
+            <div className="auth-card">
                 <h1>Sign In</h1>
-                <form onSubmit={handleSubmit}>
-                    {error && <p>{error}</p>}
-                    <div>
+                <form className="auth-form" onSubmit={handleSubmit}>
+                    {error && <p className="error-text">{error}</p>}
+                    <div className="form-field">
                         <label htmlFor="email">Email</label>
                         <input type="email" id="email" placeholder="example@gmail.com" value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} />
                     </div>
-                    <div>
+                    <div className="form-field">
                         <label htmlFor="password">Password</label>
                         <input type="password" id="password" value={form.password} onChange={(e) => setForm({...form, password: e.target.value})} />
-                        <span>Don't have an account? <Link to="/register">Sign Up</Link></span>
+                        <span className="auth-switch">Don't have an account? <Link to="/register">Sign Up</Link></span>
                     </div>
-                    <button type="submit">Sign In</button>
+                    <button className="btn btn-primary" type="submit">Sign In</button>
                 </form>
             </div>
         </div>

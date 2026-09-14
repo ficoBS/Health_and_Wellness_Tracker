@@ -14,6 +14,7 @@ const Profile = () => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loadingImage, setLoadingImage] = useState(false);
+    const [coach, setCoach] = useState(null);
 
     const navigate = useNavigate();
 
@@ -27,6 +28,7 @@ const Profile = () => {
 
             try {
                 const getUser = await axios.get(`http://localhost:5000/api/users/${userId}`);
+                console.log("Fetched user by id:", getUser.data.user);
                 setSelectedUser(getUser.data.user);
             } catch (error) {
                 console.log("Could not fetch other user by id");
@@ -36,7 +38,27 @@ const Profile = () => {
             }
         }
         fetchUser();
-    }, [user])
+    }, [])
+
+    useEffect(() => {
+        const fetchCoach = async () => {
+            try {
+                setLoading(true);
+                const result = await axios.get(`http://localhost:5000/api/coach/get/${selectedUser.id}`, {withCredentials: true});
+
+                setCoach(result.data.coach);
+            } catch (error) {
+                console.log("Could not fetch coach by id");
+                setCoach(null);
+            } finally {
+                if (selectedUser) {
+                    setLoading(false);
+                }
+            }
+        }
+
+        fetchCoach();
+    }, [selectedUser])
 
     const [userImage, setUserImage] = useState({
         userId: user.id,
@@ -154,13 +176,14 @@ const Profile = () => {
     }
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading-state">Loading...</div>;
     }
 
     console.log(selectedUser);
+    console.log(coach);
     return (
-        <main>
-            <div id='profileHeader'>
+        <main className="page profile-page">
+            <div id='profileHeader' className="card">
                 <div>
                     {!selectedUser.image ?
                     <img src={userLogo} alt='userLogo' /> :
@@ -169,22 +192,22 @@ const Profile = () => {
                 <div>
                     <span>{selectedUser.first_name} {selectedUser.last_name}</span>
                     <p>Member since {selectedUser.created_at.substr(0,10)}</p>
-                    {isPersonal ? <button onClick={() => setShowModalImage(true)}>Edit profile</button> : ""}
+                    {isPersonal ? <button className="btn btn-secondary btn-sm" onClick={() => setShowModalImage(true)}>Edit profile</button> : ""}
                 </div>
             </div>
 
-            <div className='card'>
+            <div className='card info-card'>
                 <div>
                     <h4>
                         Personal Info
                     </h4>
-                    {isPersonal ? <button onClick={() => setShowModal(true)}>Edit</button> : ""}
+                    {isPersonal ? <button className="btn btn-secondary btn-sm" onClick={() => setShowModal(true)}>Edit</button> : ""}
                 </div>
 
-                <div>
+                {/* <div>
                     <p>Full Name</p>
                     <p>{selectedUser.first_name} {selectedUser.last_name}</p>
-                </div>
+                </div> */}
 
                 <div>
                     <p>Email</p>
@@ -227,8 +250,8 @@ const Profile = () => {
                 </div>
             </div>
 
-            {selectedUser.role === "coach" ?
-                <div className='card'>
+            {coach ?
+                <div className='card info-card'>
                     <div>
                         <h4>
                             Coach Info
@@ -237,18 +260,36 @@ const Profile = () => {
                     
                     {/* COACH INFO */}
                     <div>
-                        <p>Full Name</p>
-                        <p>{selectedUser.first_name} {selectedUser.last_name}</p>
+                        <p>Title</p>
+                        <div>{coach.title}</div>
                     </div>
 
-                
+                    <div>
+                        <p>Specializations</p>
+                        <div>{coach.specializations}</div>
+                    </div>
+
+                    <div>
+                        <p>Experience</p>
+                        <div>{coach.experience_years} years</div>
+                    </div>
+
+                    <div>
+                        <p>Biography</p>
+                        <div>{coach.biography}</div>
+                    </div>
+
+                    <div>
+                        <p>Working since</p>
+                        <div>{coach.approved_at.substr(0, 10)}</div>
+                    </div>
                 </div>
             : ""}
 
             {isPersonal && selectedUser.role === "user" && calculateAge(user.date_of_birth.substr(0,10)) >= 18 ?
-                <div className='coachCard'>
+                <div className='coachCard card'>
                     <p>Become a coach</p>
-                    <button onClick={() => navigate("/coachApply")}>Apply to be a coach</button>
+                    <button className="btn btn-primary" onClick={() => navigate("/coachApply")}>Apply to be a coach</button>
                 </div> :
                 ""
             }
@@ -257,18 +298,18 @@ const Profile = () => {
                 {isPersonal && selectedUser.role === "admin" ? 
                 <div>
                     <p>[ADMIN] See admin dashboard</p>
-                    <button onClick={() => navigate("/adminDashboard")}>Admin Dashboard</button>
+                    <button className="btn btn-primary" onClick={() => navigate("/adminDashboard")}>Admin Dashboard</button>
                 </div> : ""}
                 {isPersonal ?
                 <>
                 <div>
                     <p>Want to logout?</p>
-                    <button onClick={logout}>Logout</button>
+                    <button className="btn btn-secondary" onClick={logout}>Logout</button>
                 </div>
 
                 <div>
                     <p>Want to delete account permanently?</p>
-                    <button>Delete account</button>
+                    <button className="btn btn-danger">Delete account</button>
                 </div>
                 </> : ""}
             </div>
@@ -295,8 +336,8 @@ const Profile = () => {
                         </button>
 
                         <h2>Edit my personal info</h2>
-                        <form onSubmit={handleSubmit}>
-                            <div>
+                        <form className="auth-form" onSubmit={handleSubmit}>
+                            <div className="form-field">
                                 <label htmlFor="password">Password</label>
                                 <input type="password" id="password" onChange={(e) => setForm({...form, password: e.target.value})} />
                             </div>
@@ -341,8 +382,8 @@ const Profile = () => {
                                 <input type="number" id="height" value={form.height} onChange={(e) => setForm({...form, height: e.target.value})} />
                             </div>
 
-                            <button type='submit'>Apply</button>
-                            <button onClick={() => {setShowModal(false); resetForm();}}>Cancel</button>  
+                            <button className="btn btn-primary" type='submit'>Apply</button>
+                            <button className="btn btn-secondary" onClick={() => {setShowModal(false); resetForm();}}>Cancel</button>  
                         </form>
                     </div>
                 </div>
@@ -365,13 +406,13 @@ const Profile = () => {
                         </button>
 
                         <h2>Edit my personal info</h2>
-                        <form onSubmit={handleSubmitImage}>
+                        <form className="auth-form" onSubmit={handleSubmitImage}>
                             <input type="file" id="image" accept="image/*" onChange={uploadImage} />
 
                             {loadingImage ?
                             <p>WAIT FOR IMAGE</p> : ""}
-                            <button type='submit'>Apply</button>
-                            <button onClick={() => {setShowModalImage(false); resetImage();}}>Cancel</button>  
+                            <button className="btn btn-primary" type='submit'>Apply</button>
+                            <button className="btn btn-secondary" onClick={() => {setShowModalImage(false); resetImage();}}>Cancel</button>  
                         </form>
                     </div>
                 </div>

@@ -130,27 +130,27 @@ const AdminDashboard = () => {
     
 console.log(applications);
     return (
-        <main>
+        <main className="page admin-page">
             <div id='coachList'>
                 {coaches.map((coach) => (
-                <div key={coach.id} className="coachListItem" name={coach.id}>
+                <div key={coach.id} className="coachListItem card" name={coach.id}>
                     <img className='coachImage' src={coach.image} alt={coach.first_name + " " + coach.last_name} />
                     <span>{coach.first_name + " " + coach.last_name}</span>
                     <div><a href={'/profile/' + coach.id}>View profile</a></div>
-                    <div><button onClick={() => Fire(coach.id)}>Fire</button></div>
+                    <div><button className="btn btn-danger btn-sm" onClick={() => Fire(coach.id)}>Fire</button></div>
                 </div>
                 ))}
             </div>
 
             <div id="applicationsList">
                 {applications.map((app) => (
-                <div key={app.id} className="coachListItem" name={app.id}>
+                <div key={app.id} className="coachListItem card" name={app.id}>
                     <span>Application ID: {app.id}</span>
                     <a href={`/profile/${app.user_id}`}>View user profile</a>
                     <a href={`/application/${app.id}`}>View application</a>
                     <span>Application status: {app.status}</span>
-                    <button onClick={() => Hire(app.id)}>Hire</button>
-                    <button onClick={() => Reject(app.id)}>Reject</button>
+                    <button className="btn btn-primary btn-sm" onClick={() => Hire(app.id)}>Hire</button>
+                    <button className="btn btn-danger btn-sm" onClick={() => Reject(app.id)}>Reject</button>
                 </div>
                 ))}
             </div>

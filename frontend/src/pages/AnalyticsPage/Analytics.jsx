@@ -103,25 +103,26 @@ const Analytics = () => {
     console.log(logs);
 
     if (loading2) {
-        return <div>Loading your stats</div>
+        return <div className="loading-state">Loading your stats</div>
     }
 
  
     return (
-        <main>
-            <div>
-                <button onClick={() => {setPeriod("week"); setOffset(0);}}>Week</button>
-                <button onClick={() => {setPeriod("month"); setOffset(0);}}>Month</button>
-                <button onClick={() => {setPeriod("year"); setOffset(0);}}>Year</button>
+        <main className="page analytics-page">
+            <div className="toolbar">
+                <button className={period === "week" ? "btn btn-primary" : "btn btn-secondary"} onClick={() => {setPeriod("week"); setOffset(0);}}>Week</button>
+                <button className={period === "month" ? "btn btn-primary" : "btn btn-secondary"} onClick={() => {setPeriod("month"); setOffset(0);}}>Month</button>
+                <button className={period === "year" ? "btn btn-primary" : "btn btn-secondary"} onClick={() => {setPeriod("year"); setOffset(0);}}>Year</button>
             </div>
 
-            <div>
-                <button onClick={() => previousPeriod()}>Left</button>
+            <div className="toolbar date-nav">
+                <button className="btn btn-secondary" onClick={() => previousPeriod()}>Left</button>
                 <span id='dateInfo'></span>
-                <button onClick={() => nextPeriod()}>Next</button>
+                <button className="btn btn-secondary" onClick={() => nextPeriod()}>Next</button>
             </div>
 
-            <div id='cards'>
+            <div id='cards' className="analytics-stack">
+                <div className="metric-grid stats-grid">
                 <div className='card'>
                     <div className='cardHeader'>
                         <div>
@@ -188,6 +189,7 @@ const Analytics = () => {
                     <div className='smallText'>
                         Total sleep time this {period}
                     </div>
+                </div>
                 </div>
 
                 <div className="chartContainer">

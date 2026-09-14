@@ -98,44 +98,44 @@ const CoachApply = () => {
     }
 
     if (loading) {
-        return <div>loading...</div>
+        return <div className="loading-state">loading...</div>
     }
 
     return (
-        <main>
+        <main className="page coach-apply-page">
             {application === null ?
             <>
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className="card auth-form" onSubmit={handleSubmit}>
+                <div className="form-field">
                     <label htmlFor="biography">Biography</label>
                     <textarea id="biography" value={form.biography} onChange={(e) => setForm({...form, biography: e.target.value})}>
                     </textarea>
                 </div>
 
-                <div>
+                <div className="form-field">
                     <label htmlFor="expYears">Experience Years</label>
                     <input type="number" id="expYears" value={form.experienceYears} onChange={(e) => setForm({...form, experienceYears: e.target.value})} />
                 </div>
 
-                <div>
+                <div className="form-field">
                     <label htmlFor="title">Title</label>
                     <input type="text" id="title" value={form.title} onChange={(e) => setForm({...form, title: e.target.value})} />
                 </div>
 
-                <div>
+                <div className="form-field">
                     <label htmlFor="spec">Specializations</label>
                     <input type="text" id="spec" value={form.specializations} onChange={(e) => setForm({...form, specializations: e.target.value})} />
                 </div>
 
-                <div>
+                <div className="form-field">
                     <input type='file' multiple accept='image/*,.pdf' onChange={(e) => setFiles(Array.from(e.target.files))} />
                 </div>
-                <input type='submit' value='Apply' />
+                <input className="btn btn-primary" type='submit' value='Apply' />
             </form>
-            <button onClick={() => navigate("/profile")}>Cancel</button> 
+            <button className="btn btn-secondary" onClick={() => navigate("/profile")}>Cancel</button> 
             </>
             :
-            <div>
+            <div className="card application-card">
                 <div>
                     <h5>Biography</h5>
                     <div>{application.biography}</div>
@@ -155,10 +155,10 @@ const CoachApply = () => {
 
                 <div id='applicationImages'></div>
 
-                <div>
+                <div className="application-meta">
                     <span>Status: </span><span>{application.status}</span><span>Submitted: </span><span>{application.submitted_at.substr(0, 10)}</span>
                 </div>
-                <button onClick={() => cancelApplication()}>Cancel Application</button>
+                <button className="btn btn-danger" onClick={() => cancelApplication()}>Cancel Application</button>
             </div>
             }
         </main>
