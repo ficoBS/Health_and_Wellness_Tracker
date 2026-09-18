@@ -21,6 +21,10 @@ import AdminDashboard from './pages/AdminDashboardPage/AdminDashboard'
 import ApplicationPage from './pages/ApplicationPage/Application'
 import Chats from './pages/ChatsPage/Chats'
 import Messages from './pages/MessagesPage/Messages'
+import AiMessages from './pages/MessagesPage/AiMessages'
+import Train from './pages/TrainPage/Train'
+import AddWorkout from './pages/AddWorkoutPage/AddWorkout'
+import WorkoutDetail from './pages/WorkoutDetailsPage/WorkoutDetail'
 
 function App() {
 
@@ -44,6 +48,10 @@ function App() {
             <Route path='/application/:applicationId' element={<ApplicationPage />} />
             <Route path='/chats' element={<Chats />} />
             <Route path='/chat/:chatId' element={<Messages />} />
+            <Route path='/chat/ai' element={<AiMessages />} />
+            <Route path='/workouts' element={<Train />} />
+            <Route path='/addWorkout' element={<AddWorkout />} />
+            <Route path='/workouts/:id' element={<WorkoutDetail />} />
           </Route>
 
           <Route element={<SecondaryLayout />}>

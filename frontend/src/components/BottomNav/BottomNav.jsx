@@ -23,7 +23,7 @@ const BottomNav = () => {
                 <NavLink to='/workouts' className={({isActive}) => isActive ? "link linkActive" : "link"}>
                     <div>
                         <img src={trainLogo} alt='train' />
-                        <p>Train</p>
+                        <p>Workouts</p>
                     </div>
                 </NavLink>
             </div>

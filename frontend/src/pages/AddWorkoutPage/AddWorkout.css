@@ -1,0 +1,7 @@
+.exercisesSelect {
+    width: 40%;
+}
+
+.exercisesFieldsetItem > input {
+    width: 15%;
+}
