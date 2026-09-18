@@ -17,6 +17,12 @@
     gap: 12px;
 }
 
+.dashboard-page .card:hover,
+.analytics-page .card:hover {
+    border-color: #bfd4cb;
+    box-shadow: 0 10px 26px rgba(28, 43, 39, 0.08);
+}
+
 .dashboard-page .cardHeader {
     display: flex;
     flex-direction: row;
@@ -61,6 +67,11 @@
     font-weight: 600;
 }
 
+#chatBox {
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #ffffff, #f3faf7);
+}
+
 @media (max-width: 767px) {
     #dataInputSteps input,
     #dataInputCalories input,
@@ -69,5 +80,9 @@
         max-width: none;
         width: 100%;
         flex: 1 1 100%;
+    }
+
+    #chatBox .btn {
+        width: 100%;
     }
 }

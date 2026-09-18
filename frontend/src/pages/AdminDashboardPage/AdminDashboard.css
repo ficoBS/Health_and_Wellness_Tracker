@@ -16,6 +16,12 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 12px 16px;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.coachListItem:hover {
+    border-color: #bfd4cb;
+    box-shadow: 0 8px 20px rgba(28, 43, 39, .08);
 }
 
 .coachListItem span {
@@ -40,6 +46,7 @@
     border-radius: 50%;
     background: var(--primary-soft);
     border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(28, 43, 39, .08);
 }
 
 @media (min-width: 768px) {

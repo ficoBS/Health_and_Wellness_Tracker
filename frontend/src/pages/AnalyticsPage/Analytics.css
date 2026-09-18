@@ -47,13 +47,25 @@
     width: 100%;
     min-width: 0;
     height: 380px;
-    padding: 12px;
+    padding: 16px 12px 12px;
     box-sizing: border-box;
     background: var(--surface);
     border-radius: var(--radius);
     border: 1px solid var(--border);
     box-shadow: var(--shadow);
     overflow: hidden;
+}
+
+.analytics-page .toolbar:first-child {
+    align-self: flex-start;
+    padding: 4px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+}
+
+.analytics-page .toolbar:first-child .btn {
+    min-height: 38px;
 }
 
 @media (max-width: 767px) {
