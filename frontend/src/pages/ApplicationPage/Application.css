@@ -6,6 +6,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
+    padding: 22px;
 }
 
 .application-page h5 {
@@ -43,4 +44,10 @@
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: var(--primary-soft);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.application-page #applicationImages img:hover {
+    transform: scale(1.025);
+    box-shadow: 0 5px 16px rgba(28, 43, 39, .12);
 }

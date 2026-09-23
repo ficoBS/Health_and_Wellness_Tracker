@@ -5,3 +5,99 @@
 .chatsContainer img {
     width: 50px;
 }
+
+.chatsNav {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: var(--text);
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.chatsNav button {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+.chatsNav button:first-child {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.chatsContainer,
+.findCoachContainer {
+    max-width: 760px;
+}
+
+.chatsList,
+.findCoachContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chatItem,
+.findCoachItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 14px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 2px 8px rgba(28, 43, 39, .04);
+}
+
+.coachInfo {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 12px;
+    color: var(--text);
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.coachInfo:hover span {
+    color: var(--primary);
+}
+
+.findCoachContainer img,
+.chatsContainer img {
+    height: 50px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background: var(--primary-soft);
+}
+
+@media (max-width: 480px) {
+    .chatsNav {
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .chatsNav button {
+        flex: 1;
+    }
+
+    .findCoachItem {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .findCoachItem button {
+        width: 100%;
+    }
+}

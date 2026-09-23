@@ -9,6 +9,7 @@
     background-color: var(--surface);
     min-height: var(--bot-nav-height);
     border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 16px rgba(28, 43, 39, 0.06);
     padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
     z-index: 1000;
 }
@@ -33,6 +34,16 @@
     justify-content: center;
     min-height: 56px;
     border-radius: 10px;
+    transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.link:hover {
+    background: #f5f8f6;
+}
+
+.link:focus-visible {
+    outline: none;
+    box-shadow: var(--focus);
 }
 
 .link div {

@@ -18,9 +18,10 @@
     width: 80px;
     height: 80px;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 14px;
     background: var(--primary-soft);
     border: 1px solid var(--border);
+    box-shadow: 0 3px 10px rgba(28, 43, 39, .08);
 }
 
 #profileHeader span {
@@ -100,6 +101,12 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     padding: 16px;
+    transition: border-color .18s ease, box-shadow .18s ease;
+}
+
+.settingCards > div:hover {
+    border-color: #bfd4cb;
+    box-shadow: 0 8px 20px rgba(28, 43, 39, .08);
 }
 
 .settingCards p {
@@ -116,6 +123,7 @@
     align-items: center;
     z-index: 1100;
     padding: 16px;
+    backdrop-filter: blur(3px);
 }
 
 .modalPanel {
@@ -129,6 +137,12 @@
     overflow-y: auto;
     box-shadow: var(--shadow);
     border: 1px solid var(--border);
+    animation: modal-enter .18s ease-out;
+}
+
+@keyframes modal-enter {
+    from { opacity: 0; transform: translateY(8px) scale(.985); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .modalPanel h2 {
@@ -179,6 +193,12 @@
 
 .closeButton:hover {
     color: var(--text);
+}
+
+.closeButton:focus-visible {
+    outline: none;
+    border-radius: 50%;
+    box-shadow: var(--focus);
 }
 
 @media (max-width: 767px) {

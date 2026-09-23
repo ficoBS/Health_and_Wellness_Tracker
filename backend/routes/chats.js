@@ -64,4 +64,37 @@ router.post("/messages/send", protect, async (req, res) => {
     }
 })
 
+router.get("/ai/getAll", protect, async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const result = await pool.query("SELECT * FROM ai_chats WHERE user_id = $1;", [userId]);
+
+        if (result.rows.length === 0) {
+            const result2 = await pool.query("INSERT INTO ai_chats (user_id, title) VALUES ($1, $2) RETURNING *;", [userId, "ai message"]);
+            return res.status(200).json({chat: result2.rows[0]});
+        }
+
+        return res.status(200).json({chat: result.rows[0]});
+    } catch (error) {
+        return res.status(500).json({message: "Could not get or create chat"});
+    }
+})
+
+router.get("/ai/messages/:chatId", protect, async (req, res) => {
+    try {
+        const {chatId} = req.params;
+
+        const result = await pool.query("SELECT * FROM ai_messages WHERE ai_chat_id = $1 ORDER BY created_at ASC;", [chatId]);
+        if (result.rows.length === 0) {
+            return res.status(200).json({messages: []});
+        }
+
+        return res.status(200).json({messages: result.rows});
+    } catch (error) {
+        console.error("Message ERROR:::", error?.response?.data || error?.message || error);
+        return res.status(500).json({message: "Could not fetch ai messages"});
+    }
+})
+
 export default router

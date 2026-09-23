@@ -1,0 +1,98 @@
+#workoutDetailHeader,
+.workoutExercisesList,
+.errorMessage {
+    max-width: 1000px;
+}
+
+#workoutDetailHeader {
+    margin-bottom: 20px;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+#workoutDetailHeader h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.workoutDuration {
+    display: inline-block;
+    margin: 10px 0 0;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--primary-soft);
+    color: var(--primary);
+    font-size: .85rem;
+    font-weight: 700;
+}
+
+.workoutDescription {
+    max-width: 760px;
+    margin: 14px 0 0;
+    color: var(--text-secondary);
+    white-space: pre-wrap;
+}
+
+.workoutExercisesList {
+    padding: 20px;
+    overflow-x: auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.workoutExercisesList h2 {
+    margin: 0 0 16px;
+    font-size: 1.15rem;
+}
+
+.exercisesTable {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+    font-size: .9rem;
+}
+
+.exercisesTable th,
+.exercisesTable td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.exercisesTable th {
+    color: var(--text-secondary);
+    background: #f7faf8;
+    font-size: .75rem;
+    text-transform: uppercase;
+    letter-spacing: .035em;
+}
+
+.exercisesTable tbody tr:hover {
+    background: #f8fbf9;
+}
+
+.exercisesTable tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.errorMessage {
+    margin-bottom: 12px;
+    padding: 14px 16px;
+    border: 1px solid #efcccc;
+    border-radius: var(--radius-sm);
+    background: #fff5f5;
+    color: var(--error);
+    font-weight: 600;
+}
+
+@media (max-width: 767px) {
+    #workoutDetailHeader,
+    .workoutExercisesList {
+        padding: 16px;
+    }
+}

@@ -5,6 +5,10 @@
     max-width: 720px;
 }
 
+.coach-apply-page > .btn {
+    align-self: flex-start;
+}
+
 .coach-apply-page .auth-form .btn,
 .coach-apply-page .auth-form input[type="submit"] {
     width: 100%;
@@ -51,4 +55,16 @@
     border-radius: var(--radius-sm);
     border: 1px solid var(--border);
     background: var(--primary-soft);
+    transition: transform .18s ease, box-shadow .18s ease;
+}
+
+#applicationImages img:hover {
+    transform: scale(1.025);
+    box-shadow: 0 5px 16px rgba(28, 43, 39, .12);
+}
+
+@media (max-width: 520px) {
+    .coach-apply-page > .btn {
+        width: 100%;
+    }
 }
